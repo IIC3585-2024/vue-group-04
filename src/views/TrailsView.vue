@@ -13,8 +13,7 @@
         <TrailCard 
           v-for="(trail, i) in trails.selectedTrails" 
           :key="i" 
-          :trailName="trail.title" 
-          :image="trail.pictures[0]"
+          :trail="trail" 
         />
       </div>
     </div>

@@ -1,10 +1,8 @@
 <script setup lang="ts">
   defineProps({
-    trailName: {
-      type: String
-    },
-    image: {
-      type: String
+    trail: {
+      type: Object,
+      required: true
     }
   })
 </script>
@@ -12,10 +10,11 @@
 <template>
   <div class="trail-card">
     <img 
-      :src="image" 
-      :alt="trailName + ' image'" 
+      :src="trail.pictures[0]" 
+      :alt="trail.title + ' image'" 
     />
-    <h2>{{ trailName }}</h2>
+    <h2>{{ trail.title }}</h2>
+    <p>{{ trail.description }}</p>
     <i class="material-icons favorite-icon">favorite</i>
   </div>
 </template>
@@ -35,6 +34,7 @@
 
   img {
     border-radius: 1rem;
+    width: 100%;
   }
 
   .favorite-icon {
