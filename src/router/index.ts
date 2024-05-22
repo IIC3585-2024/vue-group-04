@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/trails',
       name: 'trails',
       component: () => import('../views/TrailsView.vue')
+    },
+    {
+      path: '/trails/:id',
+      name: 'trail',
+      component: () => import('../views/TrailShowView.vue')
     }
   ]
 })
