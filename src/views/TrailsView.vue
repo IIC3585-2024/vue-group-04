@@ -1,8 +1,14 @@
 <script setup lang="ts">
-  import { useTrailsStore } from '../stores/trails.js';
   import TrailCard from '../components/TrailCard.vue';
+  import { obtainRandomTrails } from '../services/trailsService';
+  import { ref, onMounted } from 'vue';
 
-  const trails = useTrailsStore()
+  const trails = ref();
+
+  onMounted(async () => {
+    trails.value = await obtainRandomTrails(9);
+  });
+
 </script>
 
 <template>
@@ -13,14 +19,14 @@
       <h1>Explore some trails</h1>
       <div class="card__container">
         <TrailCard 
-          v-for="(trail, i) in trails.selectedTrails" 
+          v-for="(trail, i) in trails" 
           :key="i" 
           :trail="trail" 
         />
       </div>
     </div>
     <!-- End trails container -->
-    
+
   </main>
 </template>
 
