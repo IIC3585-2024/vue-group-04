@@ -1,8 +1,15 @@
 <template>
-  <div>{{ JSON.stringify(trail) }}</div>
+  <div>
+    <div v-if="loading">
+      <Loader />
+    </div>
+    <div v-else-if="error">Error: {{ error.message }}</div>
+    <div v-else>{{ JSON.stringify(trail) }}</div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import Loader from '@/components/Loader.vue'
 import { getTrail } from '@/services/trailsService'
 import { watch, ref } from 'vue'
 import type { Ref } from 'vue'
