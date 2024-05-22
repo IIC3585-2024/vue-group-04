@@ -9,7 +9,7 @@
   <main>
     <div class="flex">
       <h1>Explore some trails</h1>
-      <div class="cards-container">
+      <div class="card__container">
         <TrailCard 
           v-for="(trail, i) in trails.selectedTrails" 
           :key="i" 
@@ -21,7 +21,7 @@
 </template>
 
 <style scoped lang="scss">
-  .cards-container {
+  .card__container {
     display: grid;
     gap: 2rem;
     margin: 2rem;
