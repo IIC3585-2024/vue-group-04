@@ -1,5 +1,8 @@
 <script setup lang="ts">
   defineProps({
+    /**
+     * Trail object to display
+     */
     trail: {
       type: Object,
       required: true

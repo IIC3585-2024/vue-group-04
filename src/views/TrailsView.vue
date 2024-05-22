@@ -7,6 +7,8 @@
 
 <template>
   <main>
+
+    <!-- Start trails container -->
     <div class="flex">
       <h1>Explore some trails</h1>
       <div class="card__container">
@@ -17,6 +19,8 @@
         />
       </div>
     </div>
+    <!-- End trails container -->
+    
   </main>
 </template>
 

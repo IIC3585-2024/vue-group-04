@@ -8,8 +8,8 @@ export const useTrailsStore = defineStore('trails', () => {
   // Trails that are going to be shown
   const selectedTrails = ref<Trail[]>([]);
 
-  // When mounted, load the first trails to show on page
   onMounted(async () => {
+    // Load the first trails to show on page
     const trails = await trailsService.obtainRandomTrails(9);
     selectedTrails.value = trails;
   });

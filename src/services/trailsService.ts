@@ -4,6 +4,8 @@ import type { Trail } from '../types';
 const typedTrailsData: Trail[] = trailsData.walks;
 
 export default {
+
+  // Obtain a number of trails at random from the db
   obtainRandomTrails(num: number): Trail[] {
     const selected: Trail[] = [];
     const usedIndices = new Set<number>();
