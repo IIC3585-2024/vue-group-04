@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { obtainRandomTrails } from '../services/trailsService';
-import { ref, onMounted } from 'vue';
-import TrailList from '../components/TrailList.vue';
+import { obtainRandomTrails } from '../services/trailsService'
+import { ref, onMounted } from 'vue'
+import TrailList from '../components/TrailList.vue'
+import type { Trail } from '../types/Trail'
 
-const trails = ref();
-
-onMounted(async () => {
-  trails.value = await obtainRandomTrails(9);
-});
+const trails = ref<Trail[]>([])
 
 onMounted(async () => {
   trails.value = await obtainRandomTrails(9)
@@ -26,7 +23,6 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-
 .trail-list {
   margin: 2rem;
 }
