@@ -18,6 +18,11 @@ const router = createRouter({
             path: '/favorites',
             name: 'favorites',
             component: () => import('../views/FavoritesView.vue')
+        },
+        {
+          path: '/trails/:id',
+          name: 'trail',
+          component: () => import('../views/TrailShowView.vue')
         }
     ]
 })

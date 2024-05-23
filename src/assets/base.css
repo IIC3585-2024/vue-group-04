@@ -20,21 +20,6 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-
-  --size-05: 0.5rem;
-  --size-1: 1rem;
-  --size-2: 2rem;
-  --size-3: 3rem;
-  --size-4: 4rem;
-  --size-5: 5rem;
-  --size-6: 6rem;
-  --size-7: 7rem;
-  --size-8: 8rem;
-  --size-9: 9rem;
-  --size-10: 10rem;
-  --size-15: 15rem;
-  --size-20: 20rem;
-  --size-25: 25rem;
 }
 
 /* semantic color variables for this project */
@@ -58,6 +43,49 @@
   --color-secondary: #b9ab9c;
 
   --color-highlight: #ff715b;
+
+  /* Border Radius */
+  --border-radius: 5px;
+  --border-radius-1: var(--border-radius);
+  --border-radius-2: calc(var(--border-radius) * 2);
+  --border-radius-3: calc(var(--border-radius) * 3);
+
+  /* Spacing */
+  --spacing-1: 5px;
+  --spacing-2: calc(var(--spacing-1) * 2);
+  --spacing-3: calc(var(--spacing-1) * 3);
+  --spacing-4: calc(var(--spacing-1) * 4);
+  --spacing-5: calc(var(--spacing-1) * 5);
+
+  /* Rem sizes */
+  --size-05: 0.5rem;
+  --size-1: 1rem;
+  --size-2: 2rem;
+  --size-3: 3rem;
+  --size-4: 4rem;
+  --size-5: 5rem;
+  --size-6: 6rem;
+  --size-7: 7rem;
+  --size-8: 8rem;
+  --size-9: 9rem;
+  --size-10: 10rem;
+  --size-15: 15rem;
+  --size-20: 20rem;
+  --size-25: 25rem;
+
+  /* Font Size */
+  --font-size-sm: 0.875rem;
+  --font-size-med: 1.125rem;
+  --font-size-lg: 1.25rem;
+
+  /* Shadow */
+  --shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  /* Sizing */
+  --sizing-sm: 320px;
+  --sizing-med: 768px;
+  --sizing-lg: 1024px;
+  --sizing-xlg: 1440px;
 }
 
 *,
@@ -76,5 +104,5 @@ body {
     color 0.5s,
     background-color 0.5s;
   line-height: 1.6;
-  font-family: "Urbanist", sans-serif;
+  font-family: 'Urbanist', sans-serif;
 }
