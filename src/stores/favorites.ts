@@ -40,21 +40,13 @@ export const useFavoritesStore = defineStore('favorites', () => {
         return favorites.value.some(favorite => favorite === id)
     }
 
-    function deleteFavorite(id: number): void {
-        favorites.value = favorites.value.filter(favorite => favorite !== id)
-    }
-
-    function addFavorite(id: number): void {
-        if (!isFavorite(id)) {
-            favorites.value.push(id)
-        }
-    }
-
     function handleFavorite(id: number): void {
         if (isFavorite(id)) {
-            deleteFavorite(id)
+            favorites.value = favorites.value.filter(favorite => favorite !== id)
         } else {
-            addFavorite(id)
+            if (!isFavorite(id)) {
+                favorites.value.push(id)
+            }
         }
     }
 
