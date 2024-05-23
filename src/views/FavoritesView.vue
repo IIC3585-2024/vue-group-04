@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import TrailCard from '../components/TrailCard.vue';
-  import { useFavoritesStore } from '../stores/favorites';
+  import TrailCard from '../components/TrailCard.vue'
+  import { useFavoritesStore } from '../stores/favorites'
 
-  const favoritesStore = useFavoritesStore();
+  const favoritesStore = useFavoritesStore()
 
 </script>
 
