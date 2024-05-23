@@ -75,6 +75,7 @@
       justify-content: center;
       align-items: center;
       padding: var(--size-05);
+      padding-top: calc(var(--size-05) + 3px);
       margin: var(--size-05);
       height: var(--size-3);
       width: var(--size-3);
