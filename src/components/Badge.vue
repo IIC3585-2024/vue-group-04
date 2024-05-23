@@ -20,7 +20,7 @@ defineProps<{
   gap: var(--spacing-1);
   align-items: center;
   background-color: var(--color-secondary);
-  padding: var(--spacing-1);
+  padding: 0 var(--spacing-1) 0 var(--spacing-1);
   border-radius: var(--border-radius-3);
   font-size: var(--font-size-sm);
 
