@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { useFavoritesStore } from '../stores/favorites';
   import TrailCard from '../components/TrailCard.vue';
+  import { useFavoritesStore } from '../stores/favorites';
 
   const favoritesStore = useFavoritesStore();
 
@@ -17,7 +17,7 @@
       </div>
       <div class="card__container">
         <TrailCard 
-          v-for="(trail, i) in favoritesStore.favorites" 
+          v-for="(trail, i) in favoritesStore.favoriteTrails" 
           :key="i" 
           :trail="trail" 
           :isFavorite="favoritesStore.isFavorite(trail.id)"

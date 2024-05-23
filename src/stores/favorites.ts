@@ -1,7 +1,7 @@
 import { ref, watch, onMounted, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { getTrails } from '../services/trailsService'
-import type { Trail } from '../types'
+import type { Trail } from '../types/Trail'
 
 export const useFavoritesStore = defineStore('favorites', () => {    
 
@@ -61,10 +61,13 @@ export const useFavoritesStore = defineStore('favorites', () => {
 
     const noFavorites = computed(() => favorites.value.length === 0)
 
+    const favoriteTrails = computed(() => trails.value.filter(trail => isFavorite(trail.id)))
+
     return {
         favorites,
         handleFavorite,
         isFavorite,
-        noFavorites
+        noFavorites,
+        favoriteTrails
     }
 })
