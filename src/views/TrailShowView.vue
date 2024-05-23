@@ -15,7 +15,7 @@
         </div>
         <div class="trail__content">
           <div class="trail__activity">
-            <Badge :icon="['fas', 'person-hiking']" :text="trail.activity" />
+            <Badge icon="hiking" :text="trail.activity" />
           </div>
           <div class="trail__description">{{ trail.description }}</div>
         </div>

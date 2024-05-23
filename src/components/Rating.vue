@@ -1,13 +1,11 @@
 <template>
   <div class="rating">
-    <FontAwesomeIcon class="rating__star" :icon="['fas', 'star']" />
+    <i class="material-icons rating__star">star</i>
     <div>{{ score }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 defineProps({
   score: {
     type: String,

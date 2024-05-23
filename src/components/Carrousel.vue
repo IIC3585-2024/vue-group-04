@@ -1,7 +1,7 @@
 <template>
   <div class="carousel">
     <div class="carousel__toggle" @click="previousSlide">
-      <FontAwesomeIcon :icon="['fas', 'circle-chevron-left']" />
+      <i class="material-icons">arrow_circle_left</i>
     </div>
     <div class="carousel__images" @click="nextSlide">
       <div
@@ -13,14 +13,13 @@
       </div>
     </div>
     <div class="carousel__toggle" @click="nextSlide">
-      <FontAwesomeIcon :icon="['fas', 'circle-chevron-right']" />
+      <i class="material-icons">arrow_circle_right</i>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const { pictures } = defineProps<{
   pictures: string[]
