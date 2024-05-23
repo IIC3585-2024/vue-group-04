@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Favorite from './Favorite.vue'
 
 defineProps({
   /**
@@ -28,13 +29,10 @@ const emit = defineEmits(['handle-favorite'])
       :style="{ backgroundImage: 'url(' + trail.pictures[0] + ')' }"
     >
       <div>
-        <i 
-          class="material-icons card__icon"
-          :class="{ 'favorite': isFavorite }"
-          @click="emit('handle-favorite', trail.id)"
-        >
-          favorite
-        </i>
+        <Favorite 
+          :isFavorite="isFavorite"
+          @click.stop.prevent="emit('handle-favorite', trail.id)"
+        />
       </div>
     </div>
     <h2>{{ trail.title }}</h2>
@@ -75,31 +73,6 @@ const emit = defineEmits(['handle-favorite'])
     margin-bottom: 1rem;
     display: flex;
     justify-content: flex-end;
-  }
-
-  &__icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--size-05);
-    padding-top: calc(var(--size-05) + 3px);
-    margin: var(--size-05);
-    height: var(--size-3);
-    width: var(--size-3);
-    font-size: var(--size-2);
-    color: var(--color-background);
-    border: 3px solid var(--color-background);
-    border-radius: var(--size-5);
-    background-color: var(--color-background-30);
-    transition: color 0.5s ease, transform 0.5s ease;
-
-    &.favorite {
-      color: var(--color-highlight);
-    }
-    
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 }
 

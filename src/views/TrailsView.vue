@@ -29,7 +29,7 @@ onMounted(async () => {
             <TrailCard 
               :trail="trail" 
               :isFavorite="favoritesStore.isFavorite(trail.id)"
-              @handle-favrite="favoritesStore.handleFavorite"
+              @handle-favorite="favoritesStore.handleFavorite"
             />
           </RouterLink>
         </div>
