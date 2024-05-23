@@ -71,17 +71,26 @@
     }
 
     &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--size-05);
+      margin: var(--size-05);
+      height: var(--size-3);
+      width: var(--size-3);
       font-size: var(--size-2);
-      transition: color 0.5s ease, transform 0.5s ease;
-      padding: var(--size-1);
       color: var(--color-background);
+      border: 3px solid var(--color-background);
+      border-radius: var(--size-5);
+      background-color: var(--color-background-30);
+      transition: color 0.5s ease, transform 0.5s ease;
 
       &.favorite {
         color: var(--color-highlight);
       }
       
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
   }
