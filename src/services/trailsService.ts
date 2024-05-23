@@ -1,4 +1,4 @@
-import type { Trail } from '../types'
+import type { Trail } from '../types/Trail'
 import { ConnectionError, NotFoundError, ServerError } from './errors'
 
 export async function obtainRandomTrails(num: number): Promise<Trail[]> {

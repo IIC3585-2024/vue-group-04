@@ -6,7 +6,7 @@
     <div v-else-if="error">
       <ErrorMessage :error="error" />
     </div>
-    <div v-else>{{ JSON.stringify(trail) }}</div>
+    <div v-else></div>
   </div>
 </template>
 
