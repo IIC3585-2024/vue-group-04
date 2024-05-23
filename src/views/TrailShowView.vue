@@ -20,7 +20,7 @@
               <Favorite 
                 :isFavorite="favoritesStore.isFavorite(trail.id)"
                 :isCard="false"
-                @click="favoritesStore.handleFavorite(trail.id)"
+                @click="favoritesStore.toggleFavorite(trail.id)"
               />
             </div>
           </div>
