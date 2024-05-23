@@ -16,13 +16,15 @@
         </h2>
       </div>
       <div class="card__container">
-        <TrailCard 
-          v-for="(trail, i) in favoritesStore.favoriteTrails" 
-          :key="i" 
-          :trail="trail" 
-          :isFavorite="favoritesStore.isFavorite(trail.id)"
-          @handle-favorite="favoritesStore.handleFavorite"
-        />
+        <div v-for="(trail, i) in favoritesStore.favoriteTrails" :key="i">
+          <RouterLink :to="'/trails/' + trail.id">
+            <TrailCard 
+              :trail="trail" 
+              :isFavorite="favoritesStore.isFavorite(trail.id)"
+              @handle-favorite="favoritesStore.handleFavorite"
+            />
+          </RouterLink>
+        </div>
       </div>
     </div>
   </main>

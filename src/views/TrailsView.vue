@@ -25,7 +25,7 @@ onMounted(async () => {
       <h1>Explore some trails</h1>
       <div class="card__container">
         <div v-for="(trail, i) in trails" :key="i">
-            <RouterLink :to="'/trails/' + trail.id">
+          <RouterLink :to="'/trails/' + trail.id">
             <TrailCard 
               :trail="trail" 
               :isFavorite="favoritesStore.isFavorite(trail.id)"
