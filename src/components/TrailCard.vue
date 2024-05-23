@@ -24,13 +24,14 @@ const emit = defineEmits(['handle-favorite'])
 
 <template>
   <div class="card">
-    <div 
+    <div
       class="card__image"
       :style="{ backgroundImage: 'url(' + trail.pictures[0] + ')' }"
     >
-      <div>
-        <Favorite 
+      <div class="card__favorite">
+        <Favorite
           :isFavorite="isFavorite"
+          type="filled"
           @click.stop.prevent="emit('handle-favorite', trail.id)"
         />
       </div>
@@ -73,6 +74,10 @@ const emit = defineEmits(['handle-favorite'])
     margin-bottom: 1rem;
     display: flex;
     justify-content: flex-end;
+  }
+
+  &__favorite {
+    margin: var(--spacing-2);
   }
 }
 

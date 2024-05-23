@@ -17,9 +17,8 @@
             <Badge icon="hiking" :text="trail.activity" />
             <div class="trail__icons">
               <Rating :score="trail.stats.rank" />
-              <Favorite 
+              <Favorite
                 :isFavorite="favoritesStore.isFavorite(trail.id)"
-                :isCard="false"
                 @click="favoritesStore.toggleFavorite(trail.id)"
               />
             </div>
