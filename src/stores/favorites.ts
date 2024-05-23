@@ -37,7 +37,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
     }
 
     function isFavorite(id: number): boolean {
-        return favorites.value.some(favorite => favorite === id)
+        return favorites.value.includes(id)
     }
 
     function handleFavorite(id: number): void {
