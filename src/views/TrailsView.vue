@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import TrailCard from '../components/TrailCard.vue'
-import { obtainRandomTrails } from '../services/trailsService'
-import { ref, onMounted } from 'vue'
+import TrailCard from '../components/TrailCard.vue';
+import { obtainRandomTrails } from '../services/trailsService';
+import { ref, onMounted } from 'vue';
+import { useFavoritesStore } from '../stores/favorites';
 import { RouterLink } from 'vue-router'
 
-const trails = ref()
+const trails = ref();
+
+const favoritesStore = useFavoritesStore();
+
+onMounted(async () => {
+  trails.value = await obtainRandomTrails(9);
+});
 
 onMounted(async () => {
   trails.value = await obtainRandomTrails(9)
@@ -19,7 +26,11 @@ onMounted(async () => {
       <div class="card__container">
         <div v-for="(trail, i) in trails" :key="i">
           <RouterLink :to="'/trails/' + trail.id">
-            <TrailCard :trail="trail" />
+            <TrailCard 
+              :trail="trail" 
+              :isFavorite="favoritesStore.isFavorite(trail.id)"
+              @handle-favorite="favoritesStore.toggleFavorite"
+            />
           </RouterLink>
         </div>
       </div>

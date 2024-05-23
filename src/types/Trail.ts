@@ -12,5 +12,5 @@ export interface Trail {
       elevation: string;
       rank: string;
     };
-  }
-  
+    id: number;
+}

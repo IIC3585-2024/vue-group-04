@@ -11,11 +11,18 @@
         <Carrousel :pictures="trail.pictures" />
         <div class="trail__head">
           <div class="trail__title">{{ trail.title }}</div>
-          <Rating :score="trail.stats.rank" />
         </div>
         <div class="trail__content">
           <div class="trail__activity">
             <Badge icon="hiking" :text="trail.activity" />
+            <div class="trail__icons">
+              <Rating :score="trail.stats.rank" />
+              <Favorite 
+                :isFavorite="favoritesStore.isFavorite(trail.id)"
+                :isCard="false"
+                @click="favoritesStore.toggleFavorite(trail.id)"
+              />
+            </div>
           </div>
           <div class="trail__description">{{ trail.description }}</div>
         </div>
@@ -29,16 +36,20 @@ import Loader from '@/components/Loader.vue'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 import Badge from '@/components/Badge.vue'
 import Carrousel from '@/components/Carrousel.vue'
+import Rating from '@/components/Rating.vue'
+import Favorite from '@/components/Favorite.vue'
 import { getTrail } from '@/services/trailsService'
 import { watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useFavoritesStore } from '@/stores/favorites'
 import type { Trail } from '@/types/Trail'
-import Rating from '@/components/Rating.vue'
 
 const route = useRoute()
 const loading = ref(true)
 const trail = ref({} as Trail)
 const error = ref<Error | null>(null)
+
+const favoritesStore = useFavoritesStore()
 
 const id = route.params.id as string
 
@@ -94,6 +105,15 @@ watch(
   &__activity {
     margin-bottom: var(--spacing-1);
     margin-top: var(--spacing-1);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-2);
   }
 }
 </style>

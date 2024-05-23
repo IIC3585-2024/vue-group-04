@@ -22,6 +22,25 @@ export async function obtainRandomTrails(num: number): Promise<Trail[]> {
   return selected
 }
 
+export async function getTrails(): Promise<Trail[]> {
+  let response: Response
+  try {
+    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/walks`)
+  } catch (error) {
+    throw new ConnectionError()
+  }
+
+  if (response.status === 404) {
+    throw new NotFoundError()
+  }
+
+  if (response.status !== 200) {
+    throw new ServerError()
+  }
+
+  return await response.json()
+}
+
 export async function getTrail(id: string): Promise<Trail> {
   let response: Response
   try {

@@ -1,13 +1,11 @@
 <script setup lang="ts">
-  import { RouterLink, RouterView } from 'vue-router'
+  import { RouterView } from 'vue-router'
+  import Navbar from '@/components/Navbar.vue'
 </script>
 
 <template>
   <header>
-    <nav>
-      <RouterLink to="/">OutdoorLife</RouterLink>
-      <RouterLink to="/trails">Trails</RouterLink>
-    </nav>
+    <Navbar />
   </header>
 
   <main>
@@ -16,67 +14,32 @@
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-  width: 100%;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  
-  font-size: 12px;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
   header {
-    display: flex;
-    place-items: center;
+    line-height: 1.5;
+    max-height: 100vh;
     width: 100%;
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    display: block;
+    margin: 0 auto 2rem;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+  @media (min-width: 1024px) {
+    header {
+      display: flex;
+      place-items: center;
+      width: 100%;
+    }
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-    padding: 1rem 0;
+    .logo {
+      margin: 0 2rem 0 0;
+    }
+
+    header .wrapper {
+      display: flex;
+      place-items: flex-start;
+      flex-wrap: wrap;
+    }
   }
-}
 </style>

@@ -23,12 +23,6 @@ h2 {
   align-items: center;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: var(--color-primary-light);
-  }
-}
-
 @media (min-width: 1024px) {
   body {
     width: 100%;
