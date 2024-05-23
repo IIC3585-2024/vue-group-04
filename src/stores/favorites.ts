@@ -52,7 +52,6 @@ export const useFavoritesStore = defineStore('favorites', () => {
     }
 
     function handleFavorite(id: number): void {
-        console.log('handleFavorite', id)
         if (isFavorite(id)) {
             deleteFavorite(id)
         } else {

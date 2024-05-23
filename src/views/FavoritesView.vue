@@ -4,9 +4,6 @@
 
   const favoritesStore = useFavoritesStore();
 
-  const handleFavorite = (id: string) => {
-    console.log(id)
-  }
 </script>
 
 <template>
