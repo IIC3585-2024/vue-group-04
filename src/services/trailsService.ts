@@ -22,10 +22,16 @@ export async function obtainRandomTrails(num: number): Promise<Trail[]> {
   return selected
 }
 
-export async function getTrails(): Promise<Trail[]> {
+export async function getTrails({ page = 1, limit = 9, title = '' } = {}): Promise<Trail[]> {
   let response: Response
+
+  const url = UrlBuilder.apiUrl('/walks')
+    .paginatedUrl(page, limit)
+    .searchUrl('title', title)
+    .toString()
+
   try {
-    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/walks`)
+    response = await fetch(url)
   } catch (error) {
     throw new ConnectionError()
   }
@@ -44,7 +50,8 @@ export async function getTrails(): Promise<Trail[]> {
 export async function getTrail(id: string): Promise<Trail> {
   let response: Response
   try {
-    response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/walks/${id}`)
+    const url = UrlBuilder.apiUrl('/walks') + `/${id}`
+    response = await fetch(url)
   } catch (error) {
     throw new ConnectionError()
   }
@@ -58,4 +65,35 @@ export async function getTrail(id: string): Promise<Trail> {
   }
 
   return await response.json()
+}
+
+class UrlBuilder {
+  private baseUrl: string
+  private params: URLSearchParams
+
+  constructor(baseUrl: string) {
+    this.baseUrl = baseUrl
+    this.params = new URLSearchParams()
+  }
+
+  static apiUrl(url: string): UrlBuilder {
+    const baseUrl = `${import.meta.env.VITE_API_BASE_URL}${url}`
+    return new UrlBuilder(baseUrl)
+  }
+
+  paginatedUrl(page: number = 1, limit: number = 25): UrlBuilder {
+    this.params.set('_page', page.toString())
+    this.params.set('_limit', limit.toString())
+    return this
+  }
+
+  searchUrl(key: string, value: string): UrlBuilder {
+    this.params.set(`${key}_like`, value)
+    return this
+  }
+
+  toString(): string {
+    const queryString = this.params.toString()
+    return queryString ? `${this.baseUrl}?${queryString}` : this.baseUrl
+  }
 }

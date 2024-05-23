@@ -1,13 +1,8 @@
 <template>
   <div class="trail-list">
-    <input
-      type="text"
-      v-model="search"
-      placeholder="Search for a trail"
-      class="trail-list__search"
-    />
+    <SearchBar :handleSearch="handleSearch" placeholder="Search for a trail" />
     <div class="trail-list__content">
-      <div v-for="trail in filteredTrails" :key="trail.id">
+      <div v-for="trail in trails" :key="trail.id">
         <RouterLink :to="'/trails/' + trail.id">
           <TrailCard
             :trail="trail"
@@ -23,22 +18,21 @@
 <script setup lang="ts">
 import type { Trail } from '../types/Trail'
 import TrailCard from '../components/TrailCard.vue'
+import SearchBar from '../components/SearchBar.vue'
 import { useFavoritesStore } from '../stores/favorites'
-import { ref, computed } from 'vue'
+import { onMounted, ref } from 'vue'
+import { getTrails } from '@/services/trailsService'
+
+const trails = ref<Trail[]>([])
 
 const favoritesStore = useFavoritesStore()
 
-const props = defineProps<{ trails: Trail[] }>()
+const handleSearch = async (value: string) => {
+  trails.value = await getTrails({ title: value })
+}
 
-const search = ref('')
-
-const filteredTrails = computed(() => {
-  if (!search.value) {
-    return props.trails
-  }
-  return props.trails.filter((trail) =>
-    trail.title.toLowerCase().includes(search.value.toLowerCase())
-  )
+onMounted(async () => {
+  trails.value = await getTrails()
 })
 </script>
 
@@ -46,14 +40,6 @@ const filteredTrails = computed(() => {
 .trail-list {
   display: flex;
   flex-direction: column;
-
-  &__search {
-    margin-bottom: var(--spacing-2);
-    padding: var(--spacing-2);
-    border: 1px solid var(--color-border);
-    border-radius: var(--size-5);
-    box-shadow: var(--shadow);
-  }
 
   &__content {
     display: grid;
