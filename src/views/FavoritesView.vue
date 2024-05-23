@@ -1,28 +1,26 @@
 <script setup lang="ts">
-  import TrailCard from '../components/TrailCard.vue';
-  import { obtainRandomTrails } from '../services/trailsService';
-  import { ref, onMounted } from 'vue';
   import { useFavoritesStore } from '../stores/favorites';
-
-  const trails = ref();
+  import TrailCard from '../components/TrailCard.vue';
 
   const favoritesStore = useFavoritesStore();
 
-  onMounted(async () => {
-    trails.value = await obtainRandomTrails(9);
-  });
-
+  const handleFavorite = (id: string) => {
+    console.log(id)
+  }
 </script>
 
 <template>
   <main>
-
-    <!-- Start trails container -->
     <div class="flex">
-      <h1>Explore some trails</h1>
+      <h1>Favorites</h1>
+      <div class="flex">
+        <h2 v-if="favoritesStore.noFavorites">
+          Choose some favorite trails
+        </h2>
+      </div>
       <div class="card__container">
         <TrailCard 
-          v-for="(trail, i) in trails" 
+          v-for="(trail, i) in favoritesStore.favorites" 
           :key="i" 
           :trail="trail" 
           :isFavorite="favoritesStore.isFavorite(trail.id)"
@@ -30,13 +28,11 @@
         />
       </div>
     </div>
-    <!-- End trails container -->
-
   </main>
 </template>
 
 <style scoped lang="scss">
-  .card__container {
+    .card__container {
     display: grid;
     gap: 2rem;
     margin: 2rem;
