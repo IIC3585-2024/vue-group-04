@@ -6,8 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const error = defineProps({
   error: {
     type: Error,
