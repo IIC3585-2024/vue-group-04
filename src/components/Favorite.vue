@@ -1,57 +1,54 @@
+<!-- Like component  -->
+
 <script setup lang="ts">
-defineProps({
-  /**
-   * Boolean to check if the trail is a favorite
-   */
-  isFavorite: {
-    type: Boolean,
-    default: false
-  },
-  isCard: {
-    type: Boolean,
-    default: true
+withDefaults(
+  defineProps<{
+    isFavorite: boolean
+    type?: 'filled'
+  }>(),
+  {
+    isFavorite: false,
+    type: undefined
   }
-})
+)
 </script>
 
 <template>
-  <div class="favorite">
-    <i 
-      class="material-icons favorite__heart"
-      :class="{ 
-        'favorite__heart_favorite': isFavorite,
-        'favorite__heart_card': isCard
-      }"
-    >
-      {{ isFavorite ? 'favorite' : 'favorite_border'}}
+  <div class="favorite" :class="type ? `favorite--${type}` : ''">
+    <i class="material-icons favorite__heart" :class="{ 'favorite__heart--active': isFavorite }">
+      {{ isFavorite ? 'favorite' : 'favorite_border' }}
     </i>
   </div>
 </template>
 
 <style scoped lang="scss">
-
 .favorite {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: var(--spacing-1);
+
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+  }
+
+  &--filled {
+    background-color: var(--color-background-mute);
+    border-radius: var(--size-5);
+    padding: var(--size-05);
+    box-shadow: var(--shadow);
+  }
 
   &__heart {
     color: var(--color-secondary);
-    border-radius: var(--size-5);
-    transition: color 0.5s ease, transform 0.5s ease;
-    
-    &_card {
-      color: var(--color-background);
-      margin: var(--size-05);
-      padding: var(--size-05);
-      background-color: var(--color-background-30);
-      
-    }
+    transition:
+      color 0.5s ease,
+      transform 0.5s ease;
 
-    &_favorite {
+    &--active {
       color: var(--color-highlight);
     }
-    
+
     &:hover {
       cursor: pointer;
     }
