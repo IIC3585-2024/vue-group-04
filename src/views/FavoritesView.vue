@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TrailCard from '../components/TrailCard.vue'
+  import TrailList from '../components/TrailList.vue'
   import { useFavoritesStore } from '../stores/favorites'
 
   const favoritesStore = useFavoritesStore()
@@ -15,17 +15,7 @@
           Choose some favorite trails
         </h2>
       </div>
-      <div class="card__container">
-        <div v-for="(trail, i) in favoritesStore.favoriteTrails" :key="i">
-          <RouterLink :to="'/trails/' + trail.id">
-            <TrailCard 
-              :trail="trail" 
-              :isFavorite="favoritesStore.isFavorite(trail.id)"
-              @handle-favorite="favoritesStore.toggleFavorite"
-            />
-          </RouterLink>
-        </div>
-      </div>
+      <TrailList :trails="favoritesStore.favoriteTrails"/>
     </div>
   </main>
 </template>
