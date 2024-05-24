@@ -1,60 +1,40 @@
 <script setup lang="ts">
-import TrailCard from '../components/TrailCard.vue';
-import { obtainRandomTrails } from '../services/trailsService';
-import { ref, onMounted } from 'vue';
-import { useFavoritesStore } from '../stores/favorites';
-import { RouterLink } from 'vue-router'
+import TrailList from '../components/TrailList.vue'
+import { onMounted, ref } from 'vue'
+import { getTrails } from '@/services/trailsService'
+import type { Trail } from '@/types/Trail'
+import SearchBar from '../components/SearchBar.vue'
 
-const trails = ref();
+const trails = ref<Trail[]>([])
 
-const favoritesStore = useFavoritesStore();
-
-onMounted(async () => {
-  trails.value = await obtainRandomTrails(9);
-});
+const handleSearch = async (value: string) => {
+  trails.value = await getTrails({ title: value })
+}
 
 onMounted(async () => {
-  trails.value = await obtainRandomTrails(9)
+  trails.value = await getTrails()
 })
 </script>
 
 <template>
   <main>
-    <!-- Start trails container -->
-    <div class="flex">
+    <div class="trails-index">
       <h1>Explore some trails</h1>
-      <div class="card__container">
-        <div v-for="(trail, i) in trails" :key="i">
-          <RouterLink :to="'/trails/' + trail.id">
-            <TrailCard 
-              :trail="trail" 
-              :isFavorite="favoritesStore.isFavorite(trail.id)"
-              @handle-favorite="favoritesStore.toggleFavorite"
-            />
-          </RouterLink>
-        </div>
-      </div>
+      <SearchBar :handleSearch="handleSearch" placeholder="Search for a trail"/>
+      <TrailList :trails />
     </div>
-    <!-- End trails container -->
   </main>
 </template>
 
 <style scoped lang="scss">
-.card__container {
-  display: grid;
-  gap: 2rem;
-  margin: 2rem;
+.search-bar {
+  width: 70%;
+}
 
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 992px) and (max-width: 1199px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 991px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.trails-index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
 }
 </style>
