@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { getTrails } from '../services/trailsService'
 import type { Trail } from '../types/Trail'
 
-export const useFavoritesStore = defineStore('favorites', () => {    
+export const useFavoritesStore = defineStore('favorites', () => {
 
     const favorites = ref<number[]>([])
     const trails = ref<Trail[]>([])
@@ -12,14 +12,19 @@ export const useFavoritesStore = defineStore('favorites', () => {
 
     const favoriteTrails = computed(() => trails.value.filter(trail => isFavorite(trail.id)))
 
-    watch(favorites, () => {
+    async function updateTrails(): Promise<void> {
+        trails.value = await getTrails({ ids: favorites.value })
+    }
+
+    watch(favorites, async () => {
         updateLocalStorage()
+        await updateTrails()
     }, {
         deep: true
     })
 
     onMounted(async () => {
-        trails.value = await getTrails()
+        await updateTrails()
 
         const storedFavorites = localStorage.getItem('favorites')
         if (storedFavorites) {

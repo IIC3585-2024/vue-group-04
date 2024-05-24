@@ -22,12 +22,13 @@ export async function obtainRandomTrails(num: number): Promise<Trail[]> {
   return selected
 }
 
-export async function getTrails({ page = 1, limit = 9, title = '' } = {}): Promise<Trail[]> {
+export async function getTrails({ page = 1, limit = 9, title = '', ids = [] }: { page?: number, limit?: number, title?: string, ids?: number[] } = {}): Promise<Trail[]> {
   let response: Response
 
   const url = UrlBuilder.apiUrl('/walks')
     .paginatedUrl(page, limit)
     .searchUrl('title', title)
+    .includeUrl('id', ids)
     .toString()
 
   try {
@@ -89,6 +90,18 @@ class UrlBuilder {
 
   searchUrl(key: string, value: string): UrlBuilder {
     this.params.set(`${key}_like`, value)
+    return this
+  }
+
+  includeUrl(key: string, values: (string | number)[]): UrlBuilder {
+    if (values.length === 0) {
+      return this
+    }
+
+    for (const value of values) {
+      this.params.append(key, value.toString())
+    }
+
     return this
   }
 
