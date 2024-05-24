@@ -55,7 +55,7 @@ const emit = defineEmits(['handle-favorite'])
 }
 
 .card {
-  padding: var(--size-2);
+  margin: 0 var(--size-2);
   border-radius: var(--size-1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.0);
   transition: box-shadow 0.5s ease;
