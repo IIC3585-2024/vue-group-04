@@ -68,6 +68,31 @@ export async function getTrail(id: string): Promise<Trail> {
   return await response.json()
 }
 
+export async function getTrailsInBounds(northEast: { lat: number; lng: number }, southWest: { lat: number; lng: number }): Promise<Trail[]> {
+  let response: Response;
+
+  const url = UrlBuilder.apiUrl('/walks')
+    .paginatedUrl(1, 20)
+    .includeBounds(northEast, southWest)
+    .toString();
+
+  try {
+    response = await fetch(url);
+  } catch (error) {
+    throw new ConnectionError();
+  }
+
+  if (response.status === 404) {
+    throw new NotFoundError();
+  }
+
+  if (response.status !== 200) {
+    throw new ServerError();
+  }
+
+  return await response.json();
+}
+
 class UrlBuilder {
   private baseUrl: string
   private params: URLSearchParams
@@ -103,6 +128,14 @@ class UrlBuilder {
     }
 
     return this
+  }
+
+  includeBounds(northEast: { lat: number; lng: number }, southWest: { lat: number; lng: number }): UrlBuilder {
+    this.params.set('latitude_lte', northEast.lat.toString());
+    this.params.set('latitude_gte', southWest.lat.toString());
+    this.params.set('longitude_lte', northEast.lng.toString());
+    this.params.set('longitude_gte', southWest.lng.toString());
+    return this;
   }
 
   toString(): string {

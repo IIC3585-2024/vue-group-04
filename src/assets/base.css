@@ -106,3 +106,9 @@ body {
   line-height: 1.6;
   font-family: 'Urbanist', sans-serif;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
