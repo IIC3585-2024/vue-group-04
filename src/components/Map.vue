@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = L.map('map').setView([-35, -71], 6);
+      this.map = L.map('map').setView([-35, -71], 6); // Asegúrate de usar el ID correcto
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
       }).addTo(this.map);
@@ -46,12 +46,20 @@ export default {
         const marker = L.marker([walk.latitude, walk.longitude])
           .addTo(this.map)
           .bindPopup(`
-            <div id = "pin-content">
+            <div id="pin-content">
                 <b>${walk.title}</b><br>
                 <img src="${walk.pictures[0]}" alt="${walk.title}" width="100">
-                <a id = 'map-button' href="/trails/${walk.id}">Ver detalles</a>
+                <a id="map-button" href="/trails/${walk.id}">Ver detalles</a>
             </div>
           `);
+
+        marker.on('click', () => {
+          this.map.setView(marker.getLatLng(), this.map.getZoom(), {
+            animate: true
+          });
+          marker.openPopup();
+        });
+
         this.mapMarkers.push(marker);
       });
     },
