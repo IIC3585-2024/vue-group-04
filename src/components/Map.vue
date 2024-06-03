@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = L.map('map').setView([-35, -71], 6); // Asegúrate de usar el ID correcto
+      this.map = L.map('map').setView([-35, -71], 6);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
       }).addTo(this.map);
