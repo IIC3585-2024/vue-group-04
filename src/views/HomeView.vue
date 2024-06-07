@@ -73,14 +73,14 @@ onMounted(async () => {
   </main>
 </template>
 
-<style lang="scss">
-.flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-3);
-}
+<style lang="scss" scoped>
+  .flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-3);
+  }
 
 	.home {
 
