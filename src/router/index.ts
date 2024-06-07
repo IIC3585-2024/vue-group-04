@@ -23,7 +23,12 @@ const router = createRouter({
           path: '/trails/:id',
           name: 'trail',
           component: () => import('../views/TrailShowView.vue')
-        }
+        },
+        {
+            path: '/map',
+            name: 'map',
+            component: () => import('../views/MapView.vue')
+          }
     ]
 })
 
