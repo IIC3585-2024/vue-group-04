@@ -1,6 +1,6 @@
 <template>
   <div class="carousel">
-    <div class="carousel__toggle" @click="previousSlide">
+    <div :class="'carousel__toggle--' + type" @click="previousSlide">
       <i class="material-icons">arrow_circle_left</i>
     </div>
     <div class="carousel__images" @click="nextSlide">
@@ -12,30 +12,62 @@
         <img class="carousel__image" :src="slide" :alt="`Slide ${index + 1}`" />
       </div>
     </div>
-    <div class="carousel__toggle" @click="nextSlide">
+    <div :class="'carousel__toggle--' + type" @click="nextSlide">
       <i class="material-icons">arrow_circle_right</i>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue';
 
-const { pictures } = defineProps<{
-  pictures: string[]
-}>()
+// Define and extract props correctly
+const props = withDefaults(defineProps<{
+  pictures: string[];
+  type?: string;
+  automaticSlide?: boolean;
+}>(), {
+  type: 'shown',
+  automaticSlide: false
+});
 
-const currentSlide = ref(0)
+const { pictures, automaticSlide } = props;
+
+// Reactive variable to track the current slide
+const currentSlide = ref(0);
+let intervalId: ReturnType<typeof setInterval>;
 
 function nextSlide() {
-  console.log('nextSlide')
-  currentSlide.value = (currentSlide.value + 1) % pictures.length
+  console.log('nextSlide');
+  currentSlide.value = (currentSlide.value + 1) % pictures.length;
 }
 
 function previousSlide() {
-  console.log('previousSlide')
-  currentSlide.value = (currentSlide.value - 1 + pictures.length) % pictures.length
+  console.log('previousSlide');
+  currentSlide.value = (currentSlide.value - 1 + pictures.length) % pictures.length;
 }
+
+function startAutoSlide() {
+  intervalId = setInterval(() => {
+    nextSlide();
+  }, 2000);
+}
+
+function stopAutoSlide() {
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+}
+
+onMounted(() => {
+  if (automaticSlide) {
+    startAutoSlide();
+  }
+});
+
+onUnmounted(() => {
+  stopAutoSlide();
+});
 </script>
 
 <style scoped lang="scss">
@@ -43,12 +75,18 @@ function previousSlide() {
   display: flex;
 
   &__toggle {
-    display: flex;
-    padding: var(--spacing-1);
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
-  }
+			&--shown {
+				display: flex;
+				padding: var(--spacing-1);
+				align-items: center;
+				cursor: pointer;
+				user-select: none;
+			}
+
+			&--hidden {
+				display: none;
+			}
+		}
 
   &__images > :not(.active) {
     display: none;
