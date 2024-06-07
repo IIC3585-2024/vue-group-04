@@ -5,6 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <nav>
     <RouterLink to="/">OutdoorLife</RouterLink>
+    <RouterLink to="/map">Map</RouterLink>
     <RouterLink to="/trails">Trails</RouterLink>
     <RouterLink to="/favorites">Favorites</RouterLink>
   </nav>
