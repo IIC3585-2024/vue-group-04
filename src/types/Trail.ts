@@ -13,4 +13,6 @@ export interface Trail {
       rank: string;
     };
     id: number;
+    latitude: number;
+    longitude: number;
 }

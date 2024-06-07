@@ -24,6 +24,9 @@
             </div>
           </div>
           <div class="trail__description">{{ trail.description }}</div>
+          <div class="trail__minimap">
+            <MiniMap :latitude="trail.latitude" :longitude="trail.longitude"/>
+          </div>
         </div>
       </div>
     </div>
@@ -42,6 +45,7 @@ import { watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useFavoritesStore } from '@/stores/favorites'
 import type { Trail } from '@/types/Trail'
+import MiniMap from '@/components/MiniMap.vue'
 
 const route = useRoute()
 const loading = ref(true)
@@ -113,6 +117,11 @@ watch(
     display: flex;
     justify-content: flex-end;
     gap: var(--spacing-2);
+  }
+
+  &__minimap {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
